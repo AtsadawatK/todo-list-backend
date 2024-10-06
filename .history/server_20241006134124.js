@@ -28,25 +28,6 @@ app.get("/tasks", async (req, res) => {
   res.json(task);
 });
 
-
-app.get("/tasks/:id", async (req, res) => {
-    try {
-      const { id } = req.params; // ดึงค่า id จาก URL
-      const task = await Task.findById(id); // ค้นหา task ตาม id
-
-      if (!task) {
-        return res.status(404).json({ message: "Task not found" }); // หากไม่พบ Task
-      }
-
-      res.json(task); // ส่งข้อมูล Task ที่พบกลับไป
-    } catch (error) {
-      console.error("Error fetching task by id:", error);
-      res.status(500).json({ message: "Failed to fetch task" });
-    }
-  });
-
-
-
 app.post("/addtask", async (req, res) => {
   try {
     const { title, description, date } = req.body;
@@ -75,10 +56,10 @@ app.delete("/deletetask/:id", async (req, res) => {
   }
 });
 
-app.patch("/updatetask/:id", async (req, res) => {
+app.patch("/updatecheckedtask/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, date } = req.body;
+    const { checked } = req.body;
 
     // อัปเดตข้อมูลของ task ที่ตรงกับ ID
     const updatedTask = await Task.findByIdAndUpdate(
@@ -97,31 +78,6 @@ app.patch("/updatetask/:id", async (req, res) => {
     res.status(500).json({ message: "Failed to update task" });
   }
 });
-
-
-
-app.patch("/updatechecktask/:id", async (req, res) => {
-    try {
-      const { id } = req.body;
-      const { checked } = req.body; // ดึงค่า checked จาก body เท่านั้น
-
-      // อัปเดตฟิลด์ checked ของ task ที่ตรงกับ ID
-      const updatedTask = await Task.findByIdAndUpdate(
-        id,
-        { checked }, // อัปเดตเฉพาะ checked
-        { new: true } // ส่งค่ากลับเป็น task ที่อัปเดตแล้ว
-      );
-
-      if (!updatedTask) {
-        return res.status(404).json({ message: "Task not found" });
-      }
-
-      res.json({ message: "Task updated successfully", task: updatedTask });
-    } catch (error) {
-      console.error("Error updating task:", error);
-      res.status(500).json({ message: "Failed to update task" });
-    }
-  });
 
 app.listen(3002, () => {
   console.log("Running is App");

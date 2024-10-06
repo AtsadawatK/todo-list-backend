@@ -100,28 +100,24 @@ app.patch("/updatetask/:id", async (req, res) => {
 
 
 
-app.patch("/updatechecktask/:id", async (req, res) => {
+app.patch("/updatechecktask", async (req, res) => {
     try {
-      const { id } = req.body;
-      const { checked } = req.body; // ดึงค่า checked จาก body เท่านั้น
+        const { checked } = req.body; // ดึงค่า checked จาก body เท่านั้น
 
-      // อัปเดตฟิลด์ checked ของ task ที่ตรงกับ ID
-      const updatedTask = await Task.findByIdAndUpdate(
-        id,
-        { checked }, // อัปเดตเฉพาะ checked
-        { new: true } // ส่งค่ากลับเป็น task ที่อัปเดตแล้ว
-      );
+        // อัปเดตฟิลด์ checked ของทุก task
+        const result = await Task.updateMany(
+            {}, // อัปเดตทุกเรคคอร์ด
+            { checked }, // อัปเดตเฉพาะ checked
+            { new: true } // ไม่จำเป็นต้องใช้ใน updateMany แต่สามารถใส่ได้ถ้าต้องการ
+        );
 
-      if (!updatedTask) {
-        return res.status(404).json({ message: "Task not found" });
-      }
-
-      res.json({ message: "Task updated successfully", task: updatedTask });
+        res.json({ message: "All tasks updated successfully", result });
     } catch (error) {
-      console.error("Error updating task:", error);
-      res.status(500).json({ message: "Failed to update task" });
+        console.error("Error updating tasks:", error);
+        res.status(500).json({ message: "Failed to update tasks" });
     }
-  });
+});
+
 
 app.listen(3002, () => {
   console.log("Running is App");

@@ -8,19 +8,15 @@ const taskSchema = new Schema({
     required: true,
   },
   description: {
-    type: String,
+    type: Number,
     required: true,
   },
   date: {
     type: Date,
-    required: false,
+    required: true,
   },
-  checked: {
-    type: Boolean,
-    default:false,
-  },
-}, { timestamps: false, versionKey: false });
+}, { timestamps: true });
 
-const Task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model('Task', shoeSchema);
 
 module.exports = Task;

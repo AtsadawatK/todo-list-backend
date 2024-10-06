@@ -17,7 +17,7 @@ const taskSchema = new Schema({
   },
   checked: {
     type: Boolean,
-    default:false,
+    required: true,
   },
 }, { timestamps: false, versionKey: false });
 

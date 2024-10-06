@@ -45,7 +45,7 @@ app.get("/tasks/:id", async (req, res) => {
     }
   });
 
-
+  
 
 app.post("/addtask", async (req, res) => {
   try {
@@ -102,7 +102,7 @@ app.patch("/updatetask/:id", async (req, res) => {
 
 app.patch("/updatechecktask/:id", async (req, res) => {
     try {
-      const { id } = req.body;
+      const { id } = req.params;
       const { checked } = req.body; // ดึงค่า checked จาก body เท่านั้น
 
       // อัปเดตฟิลด์ checked ของ task ที่ตรงกับ ID

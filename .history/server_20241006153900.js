@@ -31,7 +31,7 @@ app.get("/tasks", async (req, res) => {
 
 app.get("/tasks/:id", async (req, res) => {
     try {
-      const { id } = req.params; // ดึงค่า id จาก URL
+      const { id } = req.params;
       const task = await Task.findById(id); // ค้นหา task ตาม id
 
       if (!task) {
@@ -102,7 +102,7 @@ app.patch("/updatetask/:id", async (req, res) => {
 
 app.patch("/updatechecktask/:id", async (req, res) => {
     try {
-      const { id } = req.body;
+      const { id } = req.params;
       const { checked } = req.body; // ดึงค่า checked จาก body เท่านั้น
 
       // อัปเดตฟิลด์ checked ของ task ที่ตรงกับ ID

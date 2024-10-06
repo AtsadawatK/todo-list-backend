@@ -15,11 +15,7 @@ const taskSchema = new Schema({
     type: Date,
     required: false,
   },
-  checked: {
-    type: Boolean,
-    default:false,
-  },
-}, { timestamps: false, versionKey: false });
+}, { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);
 
