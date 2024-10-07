@@ -31,14 +31,14 @@ app.get("/tasks", async (req, res) => {
 
 app.get("/tasks/:id", async (req, res) => {
     try {
-      const { id } = req.params; 
-      const task = await Task.findById(id);
+      const { id } = req.params; // ดึงค่า id จาก URL
+      const task = await Task.findById(id); // ค้นหา task ตาม id
 
       if (!task) {
-        return res.status(404).json({ message: "Task not found" });
+        return res.status(404).json({ message: "Task not found" }); // หากไม่พบ Task
       }
 
-      res.json(task);
+      res.json(task); // ส่งข้อมูล Task ที่พบกลับไป
     } catch (error) {
       console.error("Error fetching task by id:", error);
       res.status(500).json({ message: "Failed to fetch task" });

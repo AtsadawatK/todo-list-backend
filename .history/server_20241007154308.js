@@ -31,7 +31,7 @@ app.get("/tasks", async (req, res) => {
 
 app.get("/tasks/:id", async (req, res) => {
     try {
-      const { id } = req.params; 
+      const { id } = req.params; // ดึงค่า id จาก URL
       const task = await Task.findById(id);
 
       if (!task) {

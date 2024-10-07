@@ -31,8 +31,8 @@ app.get("/tasks", async (req, res) => {
 
 app.get("/tasks/:id", async (req, res) => {
     try {
-      const { id } = req.params; 
-      const task = await Task.findById(id);
+      const { id } = req.params; // ดึงค่า id จาก URL
+      const task = await Task.findById(id); // ค้นหา task ตาม id
 
       if (!task) {
         return res.status(404).json({ message: "Task not found" });
