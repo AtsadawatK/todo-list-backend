@@ -124,7 +124,7 @@ app.patch("/updatechecktask/:id", async (req, res) => {
   });
 
   const port = process.env.PORT
-
-app.listen(port, () => {
+  
+app.listen(3002, () => {
   console.log("Running is App");
 });
