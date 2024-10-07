@@ -8,8 +8,8 @@
 
 ## Deploy
 Deploy ด้วย Vercel
- - https://todo-list-backend-tau.vercel.app/updatechecktask
- - 
+ - https://todo-list-backend-tau.vercel.app/tasks
+   
 ## Route
  - ***แสดง Tasks ทั้งหมด*** - GET : /tasks
  - ***แสดง Tasks จาก ID*** - GET : /tasks/{$id}
