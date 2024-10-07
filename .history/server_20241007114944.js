@@ -1,11 +1,11 @@
 /* mongodb+srv://atsadawatkontha:<db_password>@cluster0.0ofvb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 */
-require('dotenv').config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const Task = require("./models/todolist");
 const cors = require("cors");
 const app = express();
-
+require('dotenv').config();
 app.use(express.json());
 app.use(cors());
 

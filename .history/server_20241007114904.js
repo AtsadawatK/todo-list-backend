@@ -1,18 +1,18 @@
 /* mongodb+srv://atsadawatkontha:<db_password>@cluster0.0ofvb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 */
-require('dotenv').config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const Task = require("./models/todolist");
 const cors = require("cors");
 const app = express();
-
+require('dotenv').config();
 app.use(express.json());
 app.use(cors());
 
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      process.env.MONGODB_CONNECT_URI
+      "mongodb+srv://atsadawatkontha:qOJMYWrvt2GkH0xn@cluster0.0ofvb.mongodb.net/task?retryWrites=true&w=majority&appName=Cluster0"
     );
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
