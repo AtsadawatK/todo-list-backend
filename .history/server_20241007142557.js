@@ -46,29 +46,6 @@ app.get("/tasks/:id", async (req, res) => {
   });
 
 
-  app.patch("/updatechecktask/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { checked } = req.body; // ดึงค่า checked จาก body เท่านั้น
-
-      // อัปเดตฟิลด์ checked ของ task ที่ตรงกับ ID
-      const updatedTask = await Task.findByIdAndUpdate(
-        id,
-        { checked }, // อัปเดตเฉพาะ checked
-        { new: true } // ส่งค่ากลับเป็น task ที่อัปเดตแล้ว
-      );
-
-      if (!updatedTask) {
-        return res.status(404).json({ message: "Task not found" });
-      }
-
-      res.json({ message: "Task updated successfully", task: updatedTask });
-    } catch (error) {
-      console.error("Error updating task:", error);
-      res.status(500).json({ message: "Failed to update task" });
-    }
-  });
-
 
 app.post("/addtask", async (req, res) => {
   try {
@@ -123,7 +100,28 @@ app.patch("/updatetask/:id", async (req, res) => {
 
 
 
+app.patch("/updatechecktask/:id", async (req, res) => {
+    try {
+      const { _id } = req.body;
+      const { checked } = req.body; // ดึงค่า checked จาก body เท่านั้น
 
+      // อัปเดตฟิลด์ checked ของ task ที่ตรงกับ ID
+      const updatedTask = await Task.findByIdAndUpdate(
+        _id,
+        { checked }, // อัปเดตเฉพาะ checked
+        { new: true } // ส่งค่ากลับเป็น task ที่อัปเดตแล้ว
+      );
+
+      if (!updatedTask) {
+        return res.status(404).json({ message: "Task not found" });
+      }
+
+      res.json({ message: "Task updated successfully", task: updatedTask });
+    } catch (error) {
+      console.error("Error updating task:", error);
+      res.status(500).json({ message: "Failed to update task" });
+    }
+  });
 
   const port = process.env.PORT
 
